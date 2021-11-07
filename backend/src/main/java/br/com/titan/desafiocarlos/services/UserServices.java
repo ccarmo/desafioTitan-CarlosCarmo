@@ -1,11 +1,17 @@
 package br.com.titan.desafiocarlos.services;
 
-import br.com.titan.desafiocarlos.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import br.com.titan.desafiocarlos.exceptions.UsernameNotFoundException;
 import br.com.titan.desafiocarlos.exceptions.WrongPasswordException;
 import br.com.titan.desafiocarlos.model.User;
+import br.com.titan.desafiocarlos.repository.UserRepository;
 
-public class Login {
+@Service
+public class UserServices {
+	
+	@Autowired
 	private UserRepository userRepo;
 	
 

@@ -43,7 +43,7 @@ public class Movement {
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")	
 	private LocalDateTime  date_exit;
 		
-	private LocalTime time;
+	private String time = null;
 	
     private BigDecimal value_paid;
     
@@ -51,9 +51,9 @@ public class Movement {
 	@JsonIgnoreProperties({"listMovement"})
 	private User user;
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"value"})
-	private List<Value> listValue = new ArrayList<>();
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonIgnoreProperties({"listMoviment"})
+	private Value value;
 
 	public Long getId() {
 		return id;
@@ -95,11 +95,12 @@ public class Movement {
 		this.date_exit = date_exit;
 	}
 
-	public LocalTime getTime() {
+
+	public String getTime() {
 		return time;
 	}
 
-	public void setTime(LocalTime time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 
@@ -119,13 +120,14 @@ public class Movement {
 		this.user = user;
 	}
 
-	public List<Value> getListValue() {
-		return listValue;
+	public Value getValue() {
+		return value;
 	}
 
-	public void setListValue(List<Value> listValue) {
-		this.listValue = listValue;
+	public void setValue(Value value) {
+		this.value = value;
 	}
+
 
     
 	
