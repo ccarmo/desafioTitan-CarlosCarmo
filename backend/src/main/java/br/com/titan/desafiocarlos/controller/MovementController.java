@@ -28,12 +28,12 @@ public class MovementController {
 	private MovementServices movementS;
     
 	@GetMapping("/abertos")
-	public ResponseEntity<List<Movement>> gettAllOpen() {
+	public ResponseEntity<List<Movement>> getAllOpen() {
 		return ResponseEntity.status(200).body(movementS.listAllOpenMovements());
 	}
 	
 	@GetMapping("/fechados")
-	public ResponseEntity<List<Movement>> gettAllClosed() {
+	public ResponseEntity<List<Movement>> getAllClosed() {
 		return ResponseEntity.status(200).body(movementS.listAllClosedMovements());
 	}
 	
