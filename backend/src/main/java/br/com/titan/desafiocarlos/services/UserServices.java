@@ -1,11 +1,10 @@
 package br.com.titan.desafiocarlos.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import br.com.titan.desafiocarlos.exceptions.UsernameNotFoundException;
+import br.com.titan.desafiocarlos.exceptions.WrongPasswordException;
 import br.com.titan.desafiocarlos.model.User;
 import br.com.titan.desafiocarlos.repository.UserRepository;
 
@@ -13,14 +12,22 @@ import br.com.titan.desafiocarlos.repository.UserRepository;
 public class UserServices {
 	
 	@Autowired
-	private UserRepository userR;
+	private UserRepository userRepo;
 	
-	public Optional<Object> createUser(User newUser) {
-		return userR.findByUsername(newUser.getUsername()).map(usuarioExistente -> {
-			return Optional.empty();
-		}).orElseGet(() -> {
+    /**
+	public User execute(String username, String password) {
+		
+		User userFromDB = userRepo.findByUsername(username);
+		if (userFromDB == null) {
+			throw new UsernameNotFoundException();
+		}
 
-			return Optional.ofNullable(userR.save(newUser));
-		});
-	}
+		String passwordExpected = userFromDB.getPassword();
+		
+		if(!passwordExpected.equals(password)) {
+			throw new WrongPasswordException();
+		}
+		
+		return userFromDB;
+	}**/
 }
