@@ -14,7 +14,7 @@ public class UserServices {
 	@Autowired
 	private UserRepository userRepo;
 	
-
+    /**
 	public User execute(String username, String password) {
 		
 		User userFromDB = userRepo.findByUsername(username);
@@ -29,5 +29,5 @@ public class UserServices {
 		}
 		
 		return userFromDB;
-	}
+	}**/
 }
