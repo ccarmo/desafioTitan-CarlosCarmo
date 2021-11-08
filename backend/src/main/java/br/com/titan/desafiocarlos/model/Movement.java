@@ -35,9 +35,9 @@ public class Movement {
 	@NotBlank
 	private String model_car;
 	
-	@NotBlank
+	
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime  date_entry;
+	private LocalDateTime  date_entry = LocalDateTime.now();
 	
 
 	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")	

@@ -155,7 +155,8 @@ public class MovementServices {
 	
 	/**
 	 * Método utilizado para alterar um movimento. O mesmo retorna um Optional com
-	 * Movimento caso correto ou um Optional.empyt() caso id da movimento não exista.
+	 * Movimento caso correto ou um Optional.empyt() caso id da movimento não exista. Só é possível alterar
+	 * a placa e o modelo do carro
 	 * 
 	 * @param editMovement do tipo Moviment
 	 * @return Optional com Moviment alterada
@@ -171,6 +172,23 @@ public class MovementServices {
 		}).orElseGet(() -> {
 			return Optional.empty();
 		});
+	}
+	
+	/**
+	 * Método utilizado para pesquisar movimento por id.
+	 * 
+	 * @param id_moviment do tipo Long
+	 * @return Optional com Moviment
+	 * @since 1.0
+	 * @author Carlos Carmo
+	 */
+	public Optional<Movement> searchById(Long id_movement){
+		Optional<Movement> movementExist = repositoryM.findById(id_movement);
+		if(movementExist.isPresent()) {
+			return movementExist;
+		} else {
+			return Optional.empty();
+		}
 	}
 	
 }

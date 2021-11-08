@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,7 +39,7 @@ public class Value {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate end_date;
 
-	@OneToMany
+	@OneToMany(mappedBy = "value", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties({ "value" })
 	private List<Movement> listMovement = new ArrayList<>();
 
