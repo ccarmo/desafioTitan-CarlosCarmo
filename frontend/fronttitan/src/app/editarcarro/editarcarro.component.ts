@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment.prod';
 import { Movement } from '../model/Movement';
 import { HomeService } from '../service/home.service';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-editarcarro',
@@ -12,6 +13,9 @@ import { HomeService } from '../service/home.service';
 export class EditarcarroComponent implements OnInit {
 
   movement: Movement = new Movement;
+  formGroup: FormGroup;
+
+
 
   idUser = environment.id;
   idValue: number;
@@ -30,6 +34,12 @@ export class EditarcarroComponent implements OnInit {
     if (environment.id == 0) {
       this.router.navigate(['/login'])
     }
+    this.formGroup = new FormGroup({
+    Username: new FormControl('', [
+        Validators.required,
+        Validators.pattern(/^[A-Z]{3}[0-9]{4}$/)
+      ])
+    });
     window.scroll(0,0);
    
     let id = this.idMovement

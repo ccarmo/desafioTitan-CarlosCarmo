@@ -141,7 +141,7 @@ public class MovementServices {
 		
 		    movementExist.setTime(time);
 			movementExist.setLicense_plate(valueMoviment.getLicense_plate());
-			movementExist.setModel_car(valueMoviment.getModel_car());
+			movementExist.setModel_car(valueMoviment.getModel_car().toUpperCase());
 			movementExist.setUser(valueMoviment.getUser());
 			movementExist.setDate_entry(valueMoviment.getDate_entry());
 			movementExist.setDate_exit(data_exit);

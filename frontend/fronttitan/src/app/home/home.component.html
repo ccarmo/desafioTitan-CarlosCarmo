@@ -1,15 +1,43 @@
-<label for="texto">Carros estacionados:</label>
-<select name="movement_entry" id="movement_entry" class="form-control mb-3" [(ngModel)]='idMovement' (change)='findByIdOpenMovement()'>
-    <option *ngFor='let movement of listOpenMovement' value="{{movement.id}}">Id: {{movement.id}} </option>
-</select>
 
-<label for="texto">Carros que já deram saída:</label>
-<select name="movement_exit" id="movement_exit" class="form-control mb-3" [(ngModel)]='idMovement' (change)='findByIdClosedMovement()'>
-    <option *ngFor='let movement of listClosedMovement' value="{{movement.id}}">Modelo: {{movement.model_car}} | Placa: {{movement.license_plate}} | Horário entrada: {{movement.date_entry}} | Horário saída: {{movement.date_exit}} | 
-        Tempo: {{movement.time}} (HH:MM:SS) | Valor Pago: {{movement.value_paid}}</option>
-</select>
+<div class="container-fluid">
+    <div class="row  d-flex justify-content-start mt-5">
+        <div class="col-md-8">
+            <label for="texto">Carros estacionados:</label>
+            <select name="movement_entry" id="movement_entry" class="form-control mb-3" [(ngModel)]='idMovement'
+                (change)='findByIdOpenMovement()'>
+                <option *ngFor='let movement of listOpenMovement' value="{{movement.id}}">Id: {{movement.id}} | Modelo:
+                    {{movement.model_car}} | Placa: {{movement.license_plate}} | Horário entrada: {{movement.date_entry}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="row  d-flex justify-content-start">
+        <div class="col-md-8">
+            <label for="texto">Carros que já deram saída:</label>
+            <select name="movement_exit" id="movement_exit" class="form-control mb-3" [(ngModel)]='idMovement'
+                (change)='findByIdClosedMovement()'>
+                <option *ngFor='let movement of listClosedMovement' value="{{movement.id}}">Modelo:
+                    {{movement.model_car}} |
+                    Placa: {{movement.license_plate}} | Horário entrada: {{movement.date_entry}} | Horário saída:
+                    {{movement.date_exit}} |
+                    Tempo: {{movement.time}} (HH:MM:SS) | Valor Pago: R$ {{movement.value_paid}}</option>
+            </select>
+        </div>
+    </div>
 
+    <div class="row mt-5">
+        <div class="col-md-12 d-flex justify-content-center">
+            
+                <button type="button" class="btn btn-primary btn-lg me-3" routerLink='/adicionarcarro'>Adicionar
+                    Carro</button>
+           
+           
+                <button type="button" class="btn btn-secondary btn-lg me-3" routerLink='/editarcarro'>Editar Carro</button>
+           
+          
+                <button type="button" class="btn btn-danger btn-lg" routerLink='/finalizarcarro'>Finalizar
+                    Carro</button>
+           
+        </div>
+    </div>
 
-<button type="button" class="btn btn-primary btn-lg" routerLink='/adicionarcarro'>Adicionar Carro</button>
-<button type="button" class="btn btn-secondary btn-lg" routerLink='/editarcarro'>Editar Carro</button>
-<button type="button" class="btn btn-danger btn-lg" routerLink='/finalizarcarro'>Finalizar Carro</button>
+</div>

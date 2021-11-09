@@ -1,6 +1,8 @@
 package br.com.titan.desafiocarlos.model;
 
 import java.math.BigDecimal;
+
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
@@ -15,6 +17,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import br.com.titan.desafiocarlos.constraint.LicensePlate;
+
+/**
+ * Classe que mapeia o modelo criado para o banco de dados. Há também uma validação específica para a placa do carro.
+ * 
+ * @since 1.0
+ * @author Carlos Carmo
+ */
 
 @Entity
 @Table(name = "tb_movement")
