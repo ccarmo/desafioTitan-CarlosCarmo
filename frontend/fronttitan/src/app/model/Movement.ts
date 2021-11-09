@@ -9,7 +9,8 @@ export class Movement {
     public id:         number;
     public license_plate: string;
     public model_car:     string;
-    public user:          User[];
-    public value:         Value[];
+    public time:          string;
+    public user:          User;
+    public value:         Value;
     public value_paid:    number;       
 }

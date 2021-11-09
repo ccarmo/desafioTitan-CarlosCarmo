@@ -14,4 +14,17 @@ export class HomeService {
   newMovement(movement: Movement): Observable<Movement> {
     return this.http.post<Movement>('http://localhost:8080/movimento/adicionar', movement);
   }
+
+  findById(id: number): Observable<Movement> {
+    return this.http.get<Movement>(`http://localhost:8080/movimento/pesquisar/${id}`)
+  }
+
+  getAllOpenMovement(): Observable<Movement[]> {
+    return this.http.get<Movement[]>("http://localhost:8080/movimento/abertos")
+  }
+
+  getAllClosedMovement(): Observable<Movement[]> {
+    return this.http.get<Movement[]>("http://localhost:8080/movimento/fechados")
+  }
+
 }

@@ -1,51 +1,57 @@
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <!-- CAMINHO CSS -->
-  <link href="adicionarcarro.component.css" rel="stylesheet" type="text/css" media="all" />
-  <!-- FONTES EXTERNAS -->
-  <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- CAMINHO CSS -->
+    <link href="adicionarcarro.component.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- FONTES EXTERNAS -->
+    <link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
 </head>
 
 <body>
-  <!-- main -->
+    <!-- main -->
 
 
-  <div class="container-fluid d-flex justify-content-center">
-      <div class="col-md-12">
-          <div class="p-3"></div>
-          <div class="row">
-            
-          </div>
-          <div class="row d-flex justify-content-center text-center">
-              <div class="main-agileinfo">
-                  <div class="campos-inserçao">
-                      <form action="#" method="post" class="text-center">
+    <div class="container-fluid d-flex justify-content-center">
+        <div class="col-md-12">
+            <div class="p-3"></div>
+            <div class="row">
 
-                          <input [(ngModel)]='movement.license_plate' type="text" class="form-control mb-3"
-                              name="license_plate" placeholder="Placa de carro" id="license_plate">
-                          
-                          <input [(ngModel)]='movement.model_car' type="text" class="form-control" name="foto"
-                              placeholder="Modelo do carro" id="model_car">
-                          
-                          <div class="wthree-text">
-                              <div class="clear"> </div>
-                          </div>
-                          <div id="p-alinha">
-                            <input type="submit" class=""  value="CADASTRAR">
-                        </div>
-  
-                      </form>
-              
-                  </div>
-              </div>
-          </div>
-          <div class="row">
-              <!-- footer cadastro -->
+            </div>
+            <div class="row d-flex justify-content-center text-center">
+                <div class="main-agileinfo">
+                    <div class="campos-inserçao">
+                        <form action="#" method="post" class="text-center">
 
-          </div>
-          <!-- //footer cadastro -->
-      </div>
-  </div>
+                            <input [(ngModel)]='movement.license_plate' type="text" class="form-control mb-3"
+                                name="license_plate" placeholder="Placa de carro" id="license_plate">
+
+                            <input [(ngModel)]='movement.model_car' type="text" class="form-control" name="foto"
+                                placeholder="Modelo do carro" id="model_car">
+
+                            <label for="texto">Escolha um valor a ser adicionado:</label>
+                            <select name="value" id="value" class="form-control mb-3" [(ngModel)]='idValue'
+                                (change)='findByIdValue()'>
+                                <option *ngFor='let value of listValue' value="{{value.id}}">Valor 1H: {{value.first_hour_value}}</option>
+                            </select>
+
+                            <div class="wthree-text">
+                                <div class="clear"> </div>
+                            </div>
+                            <div id="p-alinha">
+                                <input type="submit" class="" (click)='adicionar()' value="CADASTRAR">
+                            </div>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <!-- footer cadastro -->
+
+            </div>
+            <!-- //footer cadastro -->
+        </div>
+    </div>
 
 </body>
