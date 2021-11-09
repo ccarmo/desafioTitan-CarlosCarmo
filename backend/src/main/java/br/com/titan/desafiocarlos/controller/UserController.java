@@ -30,7 +30,7 @@ public class UserController {
 		Optional<?> objetoCredenciado = userS.pegarCredenciais(loginSenha);
 
 		if (objetoCredenciado.isPresent()) {
-			return ResponseEntity.status(201).build();
+			return ResponseEntity.status(201).body(objetoCredenciado.get());
 		} else {
 			return ResponseEntity.status(400).build();
 		}

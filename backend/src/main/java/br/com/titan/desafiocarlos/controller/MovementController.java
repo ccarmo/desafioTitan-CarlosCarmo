@@ -37,6 +37,17 @@ public class MovementController {
 		return ResponseEntity.status(200).body(movementS.listAllClosedMovements());
 	}
 	
+	@GetMapping("/pesquisar/{id_movement}")
+	public ResponseEntity<Object> getById(@PathVariable(value = "id_movement") Long id_movement) {
+		Optional<Movement> movementExist = movementS.searchById(id_movement);
+		
+		if (movementExist.isPresent()) {
+			return ResponseEntity.status(201).body(movementExist.get());
+		} else {
+			return ResponseEntity.status(400).build();
+		}
+	}
+	
 	@PostMapping("/adicionar")
 	public ResponseEntity<Object> openMovement(@Valid @RequestBody Movement newMovement) {
 		Optional<?> movementCreate = movementS.createMovement(newMovement);
