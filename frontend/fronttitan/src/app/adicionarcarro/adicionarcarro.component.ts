@@ -56,6 +56,8 @@ export class AdicionarcarroComponent implements OnInit {
     this.value.id = this.idValue
     this.movement.value = this.value
 
+    this.movement.value.listMovement = [];
+    
     this.user.id = this.idUser
     this.movement.user = this.user
     console.log(this.movement.user)

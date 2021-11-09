@@ -27,4 +27,8 @@ export class HomeService {
     return this.http.get<Movement[]>("http://localhost:8080/movimento/fechados")
   }
 
+  editMovement(movement: Movement): Observable<Movement> {
+    return this.http.put<Movement>("http://localhost:8080/movimento/editar", movement)
+  }
+
 }

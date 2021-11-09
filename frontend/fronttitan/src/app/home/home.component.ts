@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
 
   listOpenMovement: Movement[]
   listClosedMovement: Movement[]
-
+  
   idMovement: number
   
   constructor(
@@ -46,12 +46,14 @@ export class HomeComponent implements OnInit {
   }
 
   findByIdOpenMovement() {
+    environment.idMovement = this.idMovement
     this.movementS.findById(this.idMovement).subscribe((resp: Movement) => {
       this.movement = resp;
     })
   }
 
   findByIdClosedMovement() {
+    environment.idMovement = this.idMovement
     this.movementS.findById(this.idMovement).subscribe((resp: Movement) => {
       this.movement = resp;
     })
