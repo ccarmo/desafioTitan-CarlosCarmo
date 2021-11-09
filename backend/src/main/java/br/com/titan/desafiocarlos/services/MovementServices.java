@@ -53,7 +53,7 @@ public class MovementServices {
 	 * Método utilizado para cadastrar um movimento novo no banco validando se o
 	 * usuario criador é existente. O id do usuario criador e o id do valor deve ser
 	 * passado dentro do objeto movimento para que a criação seja efetuada. Caso id
-	 * do usuario não for passado ou não existir no banco retorna um
+	 * do usuario não for passado ou não existir (o mesmo para o id do obejto value) no banco, retorna um
 	 * Optional.empty()
 	 * 
 	 * @param newMoviment do tipo Moviment

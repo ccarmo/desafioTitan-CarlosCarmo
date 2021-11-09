@@ -32,13 +32,13 @@ public class SwaggerConfig {
 	}
 
 	public static ApiInfo metadata() {
-		return new ApiInfoBuilder().title("API - Sistema Estacionamento").description("Projeto Tiran Web Jr - Sistema Estacionamento")
+		return new ApiInfoBuilder().title("API - Sistema Estacionamento").description("Projeto Titan Web Jr - Sistema Estacionamento")
 				.version("1.0.0").license("Apache License Version 2.0").licenseUrl("https://github.com/ccarmo")
 				.contact(contact()).build();
 	}
 
 	private static Contact contact() {
-		return new Contact("Carlos Carmo", "https://github.com/ccarmo", "carlosh.carmo@hotmail.com");
+		return new Contact("Carlos Carmo", "https://ccarmo.github.io", "carlosh.carmo@hotmail.com");
 	}
 
 	private static List<Response> responseMessage() {
