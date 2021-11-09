@@ -66,7 +66,7 @@ public class MovementServices {
 		Optional<Value> valueExist = repositoryV.findById(newMovement.getValue().getId());
 		return repositoryU.findById(newMovement.getUser().getId()).map(userExist -> {
 			if(valueExist.isPresent()) {
-				newMovement.setDate_entry(newMovement.getDate_entry());
+				newMovement.setDate_entry(LocalDateTime.now());
 				newMovement.setLicense_plate(newMovement.getLicense_plate());
 				newMovement.setModel_car(newMovement.getModel_car());
 				newMovement.setUser(userExist);
@@ -96,7 +96,7 @@ public class MovementServices {
 	
 	/**
 	 * Método utilizado para realizar o calculo do valor a ser pago. Quando o carro ficar menos de uma hora, o valor
-	 * cobrado será da primeira. Caso ultrapasse uma hora, as horas adicionais serão adicionadas.
+	 * cobrado será da primeira. Caso ultrapasse uma hora, as horas adicionais serão adicionadas (somente quando completar a hora cheia).
 	 * 
 	 * 
 	 * @param time do tipo Long, first_hour_value e first_hour_value do tipo BigDecimal
@@ -105,49 +105,49 @@ public class MovementServices {
 	 * @author Carlos Carmo
 	 */
 	
-	private BigDecimal calculateValue(Long time, BigDecimal first_hour_value, BigDecimal other_hour_value) {
+	
+	private BigDecimal calculateValue(Duration time, BigDecimal first_hour_value, BigDecimal other_hour_value) {
 	    
-	    BigDecimal totalValue    = BigDecimal.ZERO;
-		Integer totalTimeInteger = time.intValue();
+	    
+	    
+		Integer totalTimeInteger = time.toHoursPart();
 		Integer minTime          = 1;
 		  if(totalTimeInteger <= 1) {
 			  return first_hour_value;
 		  } else {
-			  other_hour_value.multiply(BigDecimal.valueOf(totalTimeInteger - minTime));
-			  totalValue = first_hour_value.add(other_hour_value);
+			  BigDecimal totalValue;
+			  BigDecimal temp = new BigDecimal(totalTimeInteger - minTime);
+			  BigDecimal valueOtherHours = other_hour_value.multiply(temp);
+			  totalValue = first_hour_value.add(valueOtherHours);
 			  return totalValue;		  
 		  }
 	}
 	
 	/**
-	 * Método utilizado para finalizar um movimento banco validando se o
-	 * movimento é existente. O id do movimento deve ser
-	 * passado dentro do objeto movimento para que a criação seja efetuada. Caso id
-	 * do movimento não for passado ou não existir no banco retorna um
-	 * Optional.empty()
+	 * Método utilizado para calcular quanto tempo e qual o valor que o carro pagará antes de finalizar o movimento.
 	 * 
-	 * @param closeMoviment do tipo Moviment
+	 * @param valueMoviment do tipo Moviment
 	 * @return Optional com Moviment
 	 * @since 1.0
 	 * @author Carlos Carmo
 	 */
 	
-	public Optional<?> terminateMovement(Movement closeMoviment){
-		return repositoryM.findById(closeMoviment.getId()).map(movementExist -> {
+	public Optional<?> calculateMovement(Movement valueMoviment){
+		return repositoryM.findById(valueMoviment.getId()).map(movementExist -> {
 			LocalDateTime data_exit = LocalDateTime.now();
 			
-			Duration durationTime = this.calculateTime(closeMoviment.getDate_entry(), data_exit);
-			String time = String.valueOf(durationTime.toHours()) + ":" + String.valueOf(durationTime.toMinutes()) + ":" + String.valueOf(durationTime.toSeconds());
+			Duration durationTime = this.calculateTime(valueMoviment.getDate_entry(), data_exit);
+			String time = String.valueOf(durationTime.toHoursPart()) + ":" + String.valueOf(durationTime.toMinutesPart()) + ":" + String.valueOf(durationTime.toSecondsPart());
 		
 		    movementExist.setTime(time);
-			movementExist.setLicense_plate(closeMoviment.getLicense_plate());
-			movementExist.setModel_car(closeMoviment.getModel_car());
-			movementExist.setUser(closeMoviment.getUser());
-			movementExist.setDate_entry(closeMoviment.getDate_entry());
+			movementExist.setLicense_plate(valueMoviment.getLicense_plate());
+			movementExist.setModel_car(valueMoviment.getModel_car());
+			movementExist.setUser(valueMoviment.getUser());
+			movementExist.setDate_entry(valueMoviment.getDate_entry());
 			movementExist.setDate_exit(data_exit);
-			movementExist.setValue(closeMoviment.getValue());
-			movementExist.setValue_paid(this.calculateValue(durationTime.toHours(), closeMoviment.getValue().getFirst_hour_value(), closeMoviment.getValue().getOther_hour_value()));
-			return Optional.ofNullable(repositoryM.save(movementExist));
+			movementExist.setValue(valueMoviment.getValue());
+			movementExist.setValue_paid(this.calculateValue(durationTime, valueMoviment.getValue().getFirst_hour_value(), valueMoviment.getValue().getOther_hour_value()));
+			return Optional.ofNullable(movementExist);
 		}).orElseGet(() -> {
 			return Optional.empty();
 		});
@@ -168,6 +168,31 @@ public class MovementServices {
 		return repositoryM.findById(editMovement.getId()).map(movementExist -> {
 			movementExist.setLicense_plate(editMovement.getLicense_plate());
 			movementExist.setModel_car(editMovement.getModel_car());
+			return Optional.ofNullable(repositoryM.save(movementExist));
+		}).orElseGet(() -> {
+			return Optional.empty();
+		});
+	}
+	
+	/**
+	 * Método utilizado para finalizar um movimento do banco validando se o
+	 * movimento é existente. É um tipo específico de edição onde há alteração do tempo de uso e no valor que foi pago.
+	 * Isso definirá que o carro não está mais estacionado
+	 * 
+	 * @param closeMoviment do tipo Moviment
+	 * @return Optional com Moviment
+	 * @since 1.0
+	 * @author Carlos Carmo
+	 */
+	
+	public Optional<Movement> closeMovement(Movement closeMovement) {
+		return repositoryM.findById(closeMovement.getId()).map(movementExist -> {
+			movementExist.setDate_entry(closeMovement.getDate_entry());
+			movementExist.setDate_exit(closeMovement.getDate_exit());
+			movementExist.setTime(closeMovement.getTime());
+			movementExist.setValue_paid(closeMovement.getValue_paid());
+			movementExist.setLicense_plate(closeMovement.getLicense_plate());
+			movementExist.setModel_car(closeMovement.getModel_car());
 			return Optional.ofNullable(repositoryM.save(movementExist));
 		}).orElseGet(() -> {
 			return Optional.empty();

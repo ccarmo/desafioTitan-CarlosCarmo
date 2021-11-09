@@ -12,6 +12,10 @@ public class UserDTO {
 	@NotBlank
 	private String password;
 	
+	public UserDTO () {
+		
+	}
+	
 	public Long getId() {
 		return id;
 	}

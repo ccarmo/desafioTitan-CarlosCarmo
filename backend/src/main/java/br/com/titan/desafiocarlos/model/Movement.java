@@ -2,23 +2,19 @@ package br.com.titan.desafiocarlos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import br.com.titan.desafiocarlos.constraint.LicensePlate;
 
 @Entity
 @Table(name = "tb_movement")
@@ -29,30 +25,32 @@ public class Movement {
 	private Long   id;
 	
 	@NotBlank
-	@Size(max = 7, message = "Maximo 7 caracteres")
+	@LicensePlate(message="placa nao aceita")
 	private String license_plate;
 	
 	@NotBlank
 	private String model_car;
 	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	private LocalDateTime  date_entry;
 	
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-	private LocalDateTime  date_entry = LocalDateTime.now();
-	
-
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")	
+	@JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime  date_exit;
 		
-	private String time = null;
+	private String time;
 	
     private BigDecimal value_paid;
     
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"listMovement"})
+	@ManyToOne
+	@JsonIgnoreProperties("listMovement")
 	private User user;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonIgnoreProperties({"listMoviment"})
+	public Movement () {
+		
+	}
+	
+	@ManyToOne
+	@JsonIgnoreProperties("listMoviment")
 	private Value value;
 
 	public Long getId() {

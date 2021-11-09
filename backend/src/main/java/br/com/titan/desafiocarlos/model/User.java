@@ -34,11 +34,13 @@ public class User {
 	@Size(min = 5, message = "Minimo de 5 caracteres")
 	private String password;
 	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties({"user"})
-	private List<Movement> listMovement = new ArrayList<>();
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("user")
+	private List<Movement> listMovement;
 	
-	
+	public User () {
+		
+	}
 	public Long getId() {
 		return id;
 	}
