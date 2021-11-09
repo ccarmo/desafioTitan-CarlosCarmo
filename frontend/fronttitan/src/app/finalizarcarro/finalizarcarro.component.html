@@ -1,0 +1,44 @@
+
+
+
+    <div class="container-fluid">
+
+
+        <div class="row d-flex flex-column align-items-center ">
+
+            <div class="col-md-6 mt-5">
+               
+                    <h1 class="text-center text-white mb-3">Finalizar</h1>
+                    <label class="text-white" for="texto">Placa do carro:</label>
+                    <input [(ngModel)]='movement.license_plate' type="text" disabled class="form-control mb-3"
+                        name="license_plate" placeholder="Placa de carro" readonly id="license_plate">
+                    <label class="text-white" for="texto">Modelo do Carro:</label>
+                    <input [(ngModel)]='movement.model_car' type="text" readonly class="form-control mt-1 mb-3"
+                        name="model_car" placeholder="Modelo do carro" id="model_car">
+                    <label class="text-white" for="texto">Data de entrada:</label>
+                    <input [(ngModel)]='movement.date_entry' type="text" readonly class="form-control mt-1 mb-3"
+                        name="date_entry" placeholder="Data de entrada" id="date_entry">
+                    <label class="text-white" for="texto">Data de saída:</label>
+                    <input [(ngModel)]='movement.date_exit' type="text" readonly class="form-control mt-1 mb-3"
+                        name="date_exit" placeholder="Data de saída" id="date_exit">
+                    <label class="text-white" for="texto">Tempo de uso:</label>
+                    <input [(ngModel)]='movement.time' type="text" readonly class="form-control mt-1 mb-3" name="time"
+                        placeholder="Tempo de Uso" id="time">
+                    <label class="text-white" for="texto">Valor a ser pago:</label>
+                    <input [(ngModel)]='movement.value_paid' type="number" readonly class="form-control mt-1 mb-3"
+                        name="value_paid" placeholder="Valor a ser pago" id="value_paid">
+
+                    <div class="d-flex justify-content-end">
+                        <button type="submit" class="btn btn-danger me-2" routerLink='/home'>Cancelar</button>
+                        <button type="submit" class="btn btn-success" (click)='finalizar()'>Finalizar</button>
+                    </div>
+
+               
+
+
+            </div>
+        </div>
+    </div>
+
+
+

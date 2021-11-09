@@ -39,10 +39,14 @@ public class Value {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDate end_date;
 
-	@OneToMany(mappedBy = "value", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties({ "value" })
-	private List<Movement> listMovement = new ArrayList<>();
+	@OneToMany(mappedBy = "value", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties("value")
+	private List<Movement> listMovement;
 
+	
+	public Value() {
+		
+	}
 	public Long getId() {
 		return id;
 	}

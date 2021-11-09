@@ -1,0 +1,24 @@
+<div class="container-fluid">
+
+
+    <div class="row d-flex flex-column align-items-center ">
+
+        <div class="col-md-6 mt-5">
+          
+            <h1 class="text-center text-white mb-3">Editar</h1>
+            <label class="text-white" for="texto">Placa do carro:</label>
+            <input [(ngModel)]='movement.license_plate' type="text" class="form-control mt-1 mb-3" name="license_plate"
+                placeholder="Digite aqui" id="license_plate">
+
+            <label class="text-white" for="texto">Modelo do carro:</label>
+            <input [(ngModel)]='movement.model_car' type="text" class="form-control mt-1 mb-3" name="foto"
+                placeholder="Digite aqui" id="model_car">
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-danger me-2" routerLink='/home'>Cancelar</button>
+                <button type="submit" class="btn btn-success" (click)='editar()'>Finalizar</button>
+            </div>
+        
+        </div>
+    </div>
+</div>

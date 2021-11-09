@@ -1,0 +1,31 @@
+<div class="container-fluid">
+
+
+    <div class="row d-flex flex-column align-items-center">
+        <div class="col-md-8  mt-5">
+            <h1 class="text-center text-white mb-3">Adicionar</h1>
+            <input [(ngModel)]='movement.license_plate' type="text" class="form-control mb-3" name="license_plate"
+                placeholder="Placa de carro (SÓ ACEITA PADRÃO LLLNNNN DEVIDO VALIDACAO NO BACKEND)" id="license_plate">
+
+            <input [(ngModel)]='movement.model_car' type="text" class="form-control" name="foto"
+                placeholder="Modelo do carro" id="model_car">
+
+            <label class="text-white mt-2" for="texto">Escolha um valor de cobrança:</label>
+            <select name="value" id="value" class="form-control mb-3" [(ngModel)]='idValue' (change)='findByIdValue()'>
+                <option *ngFor='let value of listValue' value="{{value.id}}">Valor 1H: R$ {{value.first_hour_value}} |
+                    Valor
+                     D+H:R$ {{value.other_hour_value}} </option>
+            </select>
+
+            
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-danger me-2" routerLink='/home'>Cancelar</button>
+                <button type="submit" class="btn btn-success" (click)='adicionar()'>Adicionar</button>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>

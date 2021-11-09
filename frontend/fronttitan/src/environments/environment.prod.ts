@@ -1,3 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  idMovement: 0,
+  username: '',
+  id: 0
 };

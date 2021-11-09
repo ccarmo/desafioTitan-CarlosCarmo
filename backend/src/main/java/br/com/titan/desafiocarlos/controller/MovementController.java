@@ -37,6 +37,17 @@ public class MovementController {
 		return ResponseEntity.status(200).body(movementS.listAllClosedMovements());
 	}
 	
+	@GetMapping("/pesquisar/{id_movement}")
+	public ResponseEntity<Object> getById(@PathVariable(value = "id_movement") Long id_movement) {
+		Optional<Movement> movementExist = movementS.searchById(id_movement);
+		
+		if (movementExist.isPresent()) {
+			return ResponseEntity.status(201).body(movementExist.get());
+		} else {
+			return ResponseEntity.status(400).build();
+		}
+	}
+	
 	@PostMapping("/adicionar")
 	public ResponseEntity<Object> openMovement(@Valid @RequestBody Movement newMovement) {
 		Optional<?> movementCreate = movementS.createMovement(newMovement);
@@ -48,12 +59,12 @@ public class MovementController {
 		}
 	}
 	
-	@PutMapping("/finalizar/{id_movement}")
+	@GetMapping("/calcular/{id_movement}")
 	public ResponseEntity<Object> closeMovement(@PathVariable(value = "id_movement") Long id_movement) {
 		Optional<Movement> movementExist = movementS.searchById(id_movement);
 		
 		if (movementExist.isPresent()) {
-			return ResponseEntity.status(201).body(movementS.terminateMovement(movementExist.get()));
+			return ResponseEntity.status(201).body(movementS.calculateMovement(movementExist.get()));
 		} else {
 			return ResponseEntity.status(400).build();
 		}
@@ -62,6 +73,17 @@ public class MovementController {
 	@PutMapping("/editar")
 	public ResponseEntity<Object> editMovement(@Valid @RequestBody Movement editMovement){
 		Optional<Movement> movementEdited = movementS.editMovement(editMovement);
+		
+		if(movementEdited.isPresent()) {
+			return ResponseEntity.status(201).body(movementEdited.get());
+		} else {
+			return ResponseEntity.status(400).build();
+		}
+	}
+	
+	@PutMapping("/finalizar")
+	public ResponseEntity<Object> closeMovement(@Valid @RequestBody Movement closedMovement){
+		Optional<Movement> movementEdited = movementS.closeMovement(closedMovement);
 		
 		if(movementEdited.isPresent()) {
 			return ResponseEntity.status(201).body(movementEdited.get());
