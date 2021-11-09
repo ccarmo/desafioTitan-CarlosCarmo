@@ -31,4 +31,12 @@ export class HomeService {
     return this.http.put<Movement>("http://localhost:8080/movimento/editar", movement)
   }
 
+  calculateMovement(id: number): Observable<Movement> {
+    return this.http.get<Movement>(`http://localhost:8080/movimento/calcular/${id}`)
+  }
+
+  closeMovement(movement: Movement): Observable<Movement> {
+    return this.http.put<Movement>("http://localhost:8080/movimento/finalizar", movement)
+  }
+
 }
