@@ -60,7 +60,9 @@ export class AdicionarcarroComponent implements OnInit {
     
     this.user.id = this.idUser
     this.movement.user = this.user
+    console.log(this.movement.value)
     console.log(this.movement.user)
+    console.log(JSON.stringify(this.movement))
     this.addCar.newMovement(this.movement).subscribe((resp: Movement)=> {
       this.movement = resp;
 
