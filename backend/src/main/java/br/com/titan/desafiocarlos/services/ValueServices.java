@@ -34,13 +34,15 @@ public class ValueServices {
 	}
 	
 	public Optional<Object> createValue(Value newValue) {
-		return valueR.findById(newValue.getId()).map(valueExist -> {
+		return valueR.findByCode(newValue.getCode()).map(valueExist -> {
 			return Optional.empty();
 		}).orElseGet(() -> {
 
 			newValue.setCode(newValue.getCode());
 			newValue.setFirst_hour_value(newValue.getFirst_hour_value());
 			newValue.setOther_hour_value(newValue.getOther_hour_value());
+			newValue.setEnd_date(newValue.getEnd_date());
+			
 
 			return Optional.ofNullable(valueR.save(newValue));
 		});

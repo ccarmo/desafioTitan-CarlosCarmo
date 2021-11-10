@@ -2,7 +2,6 @@ package br.com.titan.desafiocarlos.model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,27 +12,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
-@Table(name = "tb_value")
+@Table(name = "tb_valor")
 public class Value {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@Size(min = 1)
-	private Long code;
+    
+	private int code;
 
-	@NotBlank
+    
 	private BigDecimal first_hour_value;
 
-	@NotBlank
+    
 	private BigDecimal other_hour_value;
 
 	@JsonFormat(pattern = "yyyy-MM-dd")
@@ -43,10 +40,6 @@ public class Value {
 	@JsonIgnoreProperties("value")
 	private List<Movement> listMovement;
 
-	
-	public Value() {
-		
-	}
 	public Long getId() {
 		return id;
 	}
@@ -55,11 +48,11 @@ public class Value {
 		this.id = id;
 	}
 
-	public Long getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(Long code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 

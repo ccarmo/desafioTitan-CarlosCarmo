@@ -41,8 +41,8 @@ public class ValueController {
 	public ResponseEntity<Object> createValue(@Valid @RequestBody Value newValue) {
 		Optional<?> valueCreate  = valueS.createValue(newValue);
 		
-		if (valueCreate .isPresent()) {
-			return ResponseEntity.status(201).body(valueCreate .get());
+		if (valueCreate.isPresent()) {
+			return ResponseEntity.status(201).body(valueCreate.get());
 		} else {
 			return ResponseEntity.status(400).build();
 		}

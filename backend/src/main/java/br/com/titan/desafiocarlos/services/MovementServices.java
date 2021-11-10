@@ -63,8 +63,8 @@ public class MovementServices {
 	 */
 	
 	public Optional<?> createMovement(Movement newMovement){
-		Optional<Value> valueExist = repositoryV.findById(newMovement.getValue().getId());
-		return repositoryU.findById(newMovement.getUser().getId()).map(userExist -> {
+		Optional<Value> valueExist = repositoryV.findByCode(newMovement.getValue().getCode());
+		return repositoryU.findByUsername(newMovement.getUser().getUsername()).map(userExist -> {
 			if(valueExist.isPresent()) {
 				newMovement.setDate_entry(LocalDateTime.now());
 				newMovement.setLicense_plate(newMovement.getLicense_plate());

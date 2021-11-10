@@ -26,7 +26,7 @@ import br.com.titan.desafiocarlos.constraint.LicensePlate;
  */
 
 @Entity
-@Table(name = "tb_movement")
+@Table(name = "tb_movimento")
 public class Movement {
     
 	@Id
@@ -53,10 +53,6 @@ public class Movement {
 	@ManyToOne
 	@JsonIgnoreProperties("listMovement")
 	private User user;
-	
-	public Movement () {
-		
-	}
 	
 	@ManyToOne
 	@JsonIgnoreProperties("listMoviment")
