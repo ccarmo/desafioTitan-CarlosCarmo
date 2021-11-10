@@ -13,6 +13,6 @@ export class LoginService {
   ) { }
   
   loginUser(userDTO: UserDTO): Observable<UserDTO> {
-    return this.http.put<UserDTO>('http://localhost:8080/usuario/entrar', userDTO);
+    return this.http.put<UserDTO>('https://desafiotitan.herokuapp.com/usuario/entrar', userDTO);
   }
 }

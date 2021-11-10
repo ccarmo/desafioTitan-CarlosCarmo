@@ -13,10 +13,10 @@ export class ValueService {
   ) { }
 
   getAll(): Observable<Value[]> {
-     return this.http.get<Value[]>("http://localhost:8080/valor");
+     return this.http.get<Value[]>("https://desafiotitan.herokuapp.com/valor");
   }
 
   getById(id: number): Observable<Value> {
-    return this.http.get<Value>(`http://localhost:8080/valor/${id}`)
+    return this.http.get<Value>(`https://desafiotitan.herokuapp.com/valor/${id}`)
   }
 }

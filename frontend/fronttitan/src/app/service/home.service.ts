@@ -12,31 +12,31 @@ export class HomeService {
   ) { }
 
   newMovement(movement: Movement): Observable<Movement> {
-    return this.http.post<Movement>('http://localhost:8080/movimento/adicionar', movement);
+    return this.http.post<Movement>('https://desafiotitan.herokuapp.com/movimento/adicionar', movement);
   }
 
   findById(id: number): Observable<Movement> {
-    return this.http.get<Movement>(`http://localhost:8080/movimento/pesquisar/${id}`)
+    return this.http.get<Movement>(`https://desafiotitan.herokuapp.com/movimento/pesquisar/${id}`)
   }
 
   getAllOpenMovement(): Observable<Movement[]> {
-    return this.http.get<Movement[]>("http://localhost:8080/movimento/abertos")
+    return this.http.get<Movement[]>("https://desafiotitan.herokuapp.com/movimento/abertos")
   }
 
   getAllClosedMovement(): Observable<Movement[]> {
-    return this.http.get<Movement[]>("http://localhost:8080/movimento/fechados")
+    return this.http.get<Movement[]>("https://desafiotitan.herokuapp.com/movimento/fechados")
   }
 
   editMovement(movement: Movement): Observable<Movement> {
-    return this.http.put<Movement>("http://localhost:8080/movimento/editar", movement)
+    return this.http.put<Movement>("https://desafiotitan.herokuapp.com/movimento/editar", movement)
   }
 
   calculateMovement(id: number): Observable<Movement> {
-    return this.http.get<Movement>(`http://localhost:8080/movimento/calcular/${id}`)
+    return this.http.get<Movement>(`https://desafiotitan.herokuapp.com/movimento/calcular/${id}`)
   }
 
   closeMovement(movement: Movement): Observable<Movement> {
-    return this.http.put<Movement>("http://localhost:8080/movimento/finalizar", movement)
+    return this.http.put<Movement>("https://desafiotitan.herokuapp.com/movimento/finalizar", movement)
   }
 
 }
