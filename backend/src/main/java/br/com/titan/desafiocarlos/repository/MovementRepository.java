@@ -11,9 +11,9 @@ import br.com.titan.desafiocarlos.model.Movement;
 @Repository
 public interface MovementRepository extends JpaRepository<Movement, Long>{
 	
-	@Query(value = "SELECT * FROM tb_movement WHERE time is null", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_movimento WHERE time is null", nativeQuery = true)
 	List<Movement> findAllOpen();
 	
-	@Query(value = "SELECT * FROM tb_movement WHERE time is not null", nativeQuery = true)
+	@Query(value = "SELECT * FROM tb_movimento WHERE time is not null", nativeQuery = true)
 	List<Movement> findAllClosed();
 }
