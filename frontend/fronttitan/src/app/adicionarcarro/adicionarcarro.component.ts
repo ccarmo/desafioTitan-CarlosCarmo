@@ -18,7 +18,9 @@ export class AdicionarcarroComponent implements OnInit {
   user: User = new User;
   value: Value = new Value;
   listValue: Value[]
-  idUser = environment.id;
+  username = environment.username;
+  
+  codeValue: number;
   idValue: number;
   
 
@@ -58,7 +60,7 @@ export class AdicionarcarroComponent implements OnInit {
 
     this.movement.value.listMovement = [];
     
-    this.user.id = this.idUser
+    this.user.username = this.username
     this.movement.user = this.user
     console.log(this.movement.value)
     console.log(this.movement.user)
